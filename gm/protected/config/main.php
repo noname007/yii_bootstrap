@@ -11,23 +11,30 @@ return array(
 
 	// preloading 'log' component
 	'preload'=>array('log'),
-
+	'theme'=>'bootstrap',
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+
+        'ext.bootstrap-theme.widgets.*',
+        'ext.bootstrap-theme.helpers.*',
+        'ext.bootstrap-theme.behaviors.*',
 	),
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		/*
+		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'Enter Your Password Here',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+			'generatorPaths'=>array(
+                'ext.bootstrap-theme.gii',
+            ),
 		),
-		*/
+		
 	),
 
 	// application components
