@@ -109,6 +109,9 @@ class CController extends CBaseController
 	 */
 	public function __construct($id,$module=null)
 	{
+		$this->echo_method(__METHOD__);
+		var_dump($id);
+		var_dump($module);
 		$this->_id=$id;
 		$this->_module=$module;
 		$this->attachBehaviors($this->behaviors());
@@ -121,6 +124,8 @@ class CController extends CBaseController
 	 */
 	public function init()
 	{
+		echo '111111111111111111111111111111111111111111111';
+		$this->echo_method(__METHOD__);
 	}
 
 	/**
@@ -256,8 +261,16 @@ class CController extends CBaseController
 	 */
 	public function run($actionID)
 	{
+		$this->echo_method(__METHOD__);
+		var_dump( $this);
 		if(($action=$this->createAction($actionID))!==null)
 		{
+			echo '<br/>';
+			echo '<br/>';
+			echo '<br/>';
+			echo '<br/>';
+			var_dump($action);
+			var_dump($this->_module);
 			if(($parent=$this->getModule())===null)
 				$parent=Yii::app();
 			if($parent->beforeControllerAction($this,$action))
@@ -282,6 +295,12 @@ class CController extends CBaseController
 	 */
 	public function runActionWithFilters($action,$filters)
 	{
+		$this->echo_method(__METHOD__);
+		var_dump($action);
+		echo '<br>';
+		echo '<br>';
+		echo '<br>';
+		var_dump($filters);
 		if(empty($filters))
 			$this->runAction($action);
 		else
@@ -301,6 +320,13 @@ class CController extends CBaseController
 	 */
 	public function runAction($action)
 	{
+		$this->echo_method(__METHOD__);
+		var_dump($this->_action);
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		var_dump($action);
 		$priorAction=$this->_action;
 		$this->_action=$action;
 		if($this->beforeAction($action))
@@ -408,6 +434,10 @@ class CController extends CBaseController
 	 */
 	public function createAction($actionID)
 	{
+		$this->echo_method(__METHOD__);
+		var_dump($this);
+		var_dump($actionID);
+		echo $this->defaultAction;
 		if($actionID==='')
 			$actionID=$this->defaultAction;
 		if(method_exists($this,'action'.$actionID) && strcasecmp($actionID,'s')) // we have actions method
@@ -583,6 +613,10 @@ class CController extends CBaseController
 	 */
 	public function getViewFile($viewName)
 	{
+		$this->echo_method(__METHOD__);
+		echo '<br/>';
+		echo '<br/>';
+		var_dump(Yii::app()->getTheme());
 		if(($theme=Yii::app()->getTheme())!==null && ($viewFile=$theme->getViewFile($this,$viewName))!==false)
 			return $viewFile;
 		$moduleViewPath=$basePath=Yii::app()->getViewPath();
@@ -779,7 +813,20 @@ class CController extends CBaseController
 	{
 		if($this->beforeRender($view))
 		{
+			$this->echo_method(__METHOD__);
+			var_dump($view);
+			echo '<br/>';
+			echo '<br/>';
+			var_dump($data);
+			echo '<br/>';
+			echo '<br/>';
+			var_dump($return);
+			echo '<br/>';
+			echo '<br/>';
+			echo '<br/>';
+			echo '======================<br/>';
 			$output=$this->renderPartial($view,$data,true);
+			print_r( $output);
 			if(($layoutFile=$this->getLayoutFile($this->layout))!==false)
 				$output=$this->renderFile($layoutFile,array('content'=>$output),true);
 
@@ -866,6 +913,10 @@ class CController extends CBaseController
 	{
 		if(($viewFile=$this->getViewFile($view))!==false)
 		{
+			$this->echo_method(__METHOD__);
+			echo '<br/>';
+			echo '<br/>';
+			echo $viewFile;
 			$output=$this->renderFile($viewFile,$data,true);
 			if($processOutput)
 				$output=$this->processOutput($output);

@@ -36,6 +36,7 @@ class CTheme extends CComponent
 	 */
 	public function __construct($name,$basePath,$baseUrl)
 	{
+		echo $name," <br/>",$basePath," <br/>",$baseUrl," <br/>";
 		$this->_name=$name;
 		$this->_baseUrl=$baseUrl;
 		$this->_basePath=$basePath;

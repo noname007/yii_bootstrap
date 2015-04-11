@@ -42,10 +42,31 @@ class CInlineAction extends CAction
 	{
 		$methodName='action'.$this->getId();
 		$controller=$this->getController();
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		echo $methodName;
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		var_dump($controller);
 		$method=new ReflectionMethod($controller, $methodName);
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+
+		var_dump($method);
 		if($method->getNumberOfParameters()>0)
 			return $this->runWithParamsInternal($controller, $method, $params);
-
+		echo '<br/>';
+		echo '<br/>';
+		echo 111111;
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
 		$controller->$methodName();
 		return true;
 	}

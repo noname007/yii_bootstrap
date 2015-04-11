@@ -40,6 +40,10 @@ abstract class CAction extends CComponent implements IAction
 	 */
 	public function __construct($controller,$id)
 	{
+		$this->echo_method(__METHOD__);
+		var_dump($controller);
+		var_dump($id);
+		echo '=========================================<br/>';
 		$this->_controller=$controller;
 		$this->_id=$id;
 	}

@@ -130,6 +130,8 @@ class CWebApplication extends CApplication
 	 */
 	public function processRequest()
 	{
+	    echo __METHOD__;
+
 		if(is_array($this->catchAllRequest) && isset($this->catchAllRequest[0]))
 		{
 			$route=$this->catchAllRequest[0];
@@ -138,6 +140,9 @@ class CWebApplication extends CApplication
 		}
 		else
 			$route=$this->getUrlManager()->parseUrl($this->getRequest());
+		 // __halt_compiler(0);
+		echo '<br/>route: ';
+		var_dump($route);
 		$this->runController($route);
 	}
 
@@ -253,6 +258,10 @@ class CWebApplication extends CApplication
 	 */
 	public function getTheme()
 	{
+		echo __LINE__,__FILE__;
+		$this->echo_method(__METHOD__);
+		var_dump($this->_theme);
+
 		if(is_string($this->_theme))
 			$this->_theme=$this->getThemeManager()->getTheme($this->_theme);
 		return $this->_theme;
@@ -275,11 +284,18 @@ class CWebApplication extends CApplication
 	{
 		if(($ca=$this->createController($route))!==null)
 		{
+			$this->echo_method(__METHOD__);
+			var_dump($ca);
 			list($controller,$actionID)=$ca;
 			$oldController=$this->_controller;
 			$this->_controller=$controller;
+			echo '<br/>**********************************<br/><br/><br/><br/>';
+			var_dump($controller);
+			echo '<br/>**********************************<br/><br/><br/><br/>';
 			$controller->init();
+			var_dump($controller);
 			$controller->run($actionID);
+			echo '1111111111111111111111111<br/>';
 			$this->_controller=$oldController;
 		}
 		else
@@ -309,6 +325,7 @@ class CWebApplication extends CApplication
 	 */
 	public function createController($route,$owner=null)
 	{
+		$this->echo_method(__METHOD__);
 		if($owner===null)
 			$owner=$this;
 		if(($route=trim($route,'/'))==='')
@@ -324,6 +341,8 @@ class CWebApplication extends CApplication
 			if(!$caseSensitive)
 				$id=strtolower($id);
 			$route=(string)substr($route,$pos+1);
+			echo $id,'<br/>';
+			var_dump($owner->controllerMap);
 			if(!isset($basePath))  // first segment
 			{
 				if(isset($owner->controllerMap[$id]))
@@ -336,15 +355,15 @@ class CWebApplication extends CApplication
 
 				if(($module=$owner->getModule($id))!==null)
 					return $this->createController($route,$module);
-
-				$basePath=$owner->getControllerPath();
+				// echo 11x;
+				echo $basePath=$owner->getControllerPath();
 				$controllerID='';
 			}
 			else
 				$controllerID.='/';
 			$className=ucfirst($id).'Controller';
-			$classFile=$basePath.DIRECTORY_SEPARATOR.$className.'.php';
-
+			echo '<br/>',$classFile=$basePath.DIRECTORY_SEPARATOR.$className.'.php','<br/>';
+			var_dump( $this->controllerNamespace);
 			if($owner->controllerNamespace!==null)
 				$className=$owner->controllerNamespace.'\\'.str_replace('/','\\',$controllerID).$className;
 
@@ -354,7 +373,9 @@ class CWebApplication extends CApplication
 					require($classFile);
 				if(class_exists($className,false) && is_subclass_of($className,'CController'))
 				{
+					echo '22222222222222';
 					$id[0]=strtolower($id[0]);
+					echo $controllerID.$id;
 					return array(
 						new $className($controllerID.$id,$owner===$this?null:$owner),
 						$this->parseActionParams($route),

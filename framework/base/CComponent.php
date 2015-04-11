@@ -294,6 +294,8 @@ class CComponent
 	 */
 	public function attachBehaviors($behaviors)
 	{
+		$this->echo_method(__METHOD__);
+		var_dump($behaviors);
 		foreach($behaviors as $name=>$behavior)
 			$this->attachBehavior($name,$behavior);
 	}
@@ -325,6 +327,18 @@ class CComponent
 	 */
 	public function attachBehavior($name,$behavior)
 	{
+		$this->echo_method(__METHOD__);
+		echo 'name: ';
+		var_dump($name);
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		
+		echo 'behavior:';
+		var_dump($behavior);
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
 		if(!($behavior instanceof IBehavior))
 			$behavior=Yii::createComponent($behavior);
 		$behavior->setEnabled(true);
@@ -455,10 +469,19 @@ class CComponent
 	 */
 	public function hasEventHandler($name)
 	{
+		$this->event_name();
+		// echo '<h4>所有的事件名字'.var_dump( array_keys ($this->_e)),'</h4><br/>';
+		echo '<h5>判断事件是否存在：'.$name,'</h5><br/>';
 		$name=strtolower($name);
 		return isset($this->_e[$name]) && $this->_e[$name]->getCount()>0;
 	}
 
+	public function event_name()
+	{
+		echo '<h2>**所有的事件名字'.(json_encode(array_keys($this->_e))).'</h2><br/>';
+		var_dump($this->_e);
+		
+	}
 	/**
 	 * Returns the list of attached event handlers for an event.
 	 * @param string $name the event name
@@ -513,9 +536,20 @@ class CComponent
 	 */
 	public function attachEventHandler($name,$handler)
 	{
+		echo '<h1>绑定事件 '.__METHOD__.'</h1>';
+		echo '<h4>name:'. $name," </h4><br>";
+		// echo "<h4>handle: ",var_dump($handler).'</h4><br>';
+		
+		debug_print_backtrace();
 		$this->getEventHandlers($name)->add($handler);
 	}
-
+	public function echo_method($method)
+	{
+		static $i=1;
+		echo '<br/><h3>step ',$i,': ',$method,'</h3><br/>';
+		++$i;
+		// echo 
+	}
 	/**
 	 * Detaches an existing event handler.
 	 * This method is the opposite of {@link attachEventHandler}.

@@ -268,6 +268,11 @@ abstract class CModule extends CComponent
 	 */
 	public function getModule($id)
 	{
+		echo "module:";
+		$this->echo_method(__METHOD__);
+		var_dump($this->_modules);
+		var_dump($this->_moduleConfig);
+		echo '<br/>';
 		if(isset($this->_modules[$id]) || array_key_exists($id,$this->_modules))
 			return $this->_modules[$id];
 		elseif(isset($this->_moduleConfig[$id]))
@@ -381,6 +386,16 @@ abstract class CModule extends CComponent
 	 */
 	public function getComponent($id,$createIfNull=true)
 	{
+		$this->echo_method(__METHOD__);
+		echo $id;
+		echo '<br/>';
+		echo '<br/>';
+		var_dump($this->_componentConfig);
+		echo '<br/>';
+		echo '<br/>';
+		var_dump($this->_components);
+		echo '<br/>';
+		echo '<br/>';
 		if(isset($this->_components[$id]))
 			return $this->_components[$id];
 		elseif(isset($this->_componentConfig[$id]) && $createIfNull)
@@ -390,6 +405,9 @@ abstract class CModule extends CComponent
 			{
 				Yii::trace("Loading \"$id\" application component",'system.CModule');
 				unset($config['enabled']);
+				var_dump($config);
+		echo 'ddddddddddddddddddddd<br/>';
+		echo '<br/>';
 				$component=Yii::createComponent($config);
 				$component->init();
 				return $this->_components[$id]=$component;
@@ -514,6 +532,8 @@ abstract class CModule extends CComponent
 	 */
 	public function configure($config)
 	{
+		$this->echo_method(__METHOD__);
+		var_dump($config);
 		if(is_array($config))
 		{
 			foreach($config as $key=>$value)

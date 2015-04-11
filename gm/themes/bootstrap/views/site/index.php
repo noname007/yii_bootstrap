@@ -1,6 +1,8 @@
 <?php
 $this->pageCaption='';
 $this->pageTitle=Yii::app()->name;
+// debug_print_backtrace();
+exit
 ?>
 
 <h2>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h2>

@@ -158,14 +158,14 @@ abstract class CApplication extends CModule
 		}
 
 		$this->preinit();
-
+		echo '接管错误异常处理，注册核心组件 ',__METHOD__,' <br/>';
 		$this->initSystemHandlers();
 		$this->registerCoreComponents();
 
 		$this->configure($config);
 		$this->attachBehaviors($this->behaviors);
+		echo '加载组件、绑定事件 ',__METHOD__,' <br/>';
 		$this->preloadComponents();
-
 		$this->init();
 	}
 

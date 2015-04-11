@@ -57,10 +57,30 @@ class CThemeManager extends CApplicationComponent
 	 */
 	public function getTheme($name)
 	{
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		echo '主题管理:--------------';
+		$this->echo_method(__METHOD__);
+		echo $name;
+		echo '<br/>';
+		echo '<br/>';
 		$themePath=$this->getBasePath().DIRECTORY_SEPARATOR.$name;
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
+		echo $themePath;
+		echo '<br/>';
+		echo '<br/>';
+		echo '<br/>';
 		if(is_dir($themePath))
 		{
 			$class=Yii::import($this->themeClass, true);
+		echo '<br/>6787777778333333212324335';
+		echo '<br/>';
+			var_dump($class);
+		echo '<br/>';
+		echo '<br/>';
 			return new $class($name,$themePath,$this->getBaseUrl().'/'.$name);
 		}
 		else
