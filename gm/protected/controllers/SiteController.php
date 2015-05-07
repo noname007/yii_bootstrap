@@ -27,9 +27,33 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+
+		$api = Yii::app()->getModule('api')->queue_tui_url;
+
+		 echo ($api);
+		// $this->attachEventHandler('onIndex',array($this,'index'));
+		// $this->attachEventHandler('onIndex',array($this,'index'));
+		// $this->attachEventHandler('onIndex',array($this,'index'));
+		
+		// $this->attachEventHandler('onIndex',array($this,'index'));
+		// $this->attachBehavior('Good','ddd');
+		// $this->raiseEvent('onIndex',new CEvent($this));
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		// $this->render('index');
+	}
+
+	// 事件 ===观察者模式 相当于notify
+	public function onIndex()
+	{
+		// echo  1111;
+	}
+	// 
+	public function index($a)
+	{
+		// var_dump($a);
+		// $this->echo_e();
+		echo 'in-dex';
 	}
 
 	/**

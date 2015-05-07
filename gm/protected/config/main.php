@@ -17,6 +17,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 
+        'application.modules.api.*',
         'ext.bootstrap-theme.widgets.*',
         'ext.bootstrap-theme.helpers.*',
         'ext.bootstrap-theme.behaviors.*',
@@ -34,6 +35,15 @@ return array(
                 'ext.bootstrap-theme.gii',
             ),
 		),
+		'api'=>array(
+             // 'api_version' => '1.0',
+             // 'testing' => false,
+             // 'debug' => true,
+             // 'log_session_event' => true,
+             // 'queue_pay_url' => 'http://127.0.0.1',
+             // 'queue_stats_url' =>'http://127.0.0.1',
+             'queue_tui_url'=>'127.0.0.1',
+        ),
 		
 	),
 
@@ -46,16 +56,17 @@ return array(
 		),
 
 		// uncomment the following to enable URLs in path-format
-		/*
+		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+			'caseSensitive'=>false,
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
+		
 
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
