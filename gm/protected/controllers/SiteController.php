@@ -31,13 +31,13 @@ class SiteController extends Controller
 		$api = Yii::app()->getModule('api')->queue_tui_url;
 
 		 echo ($api);
-		// $this->attachEventHandler('onIndex',array($this,'index'));
+		$this->attachEventHandler('onIndex',array($this,'index'));
 		// $this->attachEventHandler('onIndex',array($this,'index'));
 		// $this->attachEventHandler('onIndex',array($this,'index'));
 		
 		// $this->attachEventHandler('onIndex',array($this,'index'));
 		// $this->attachBehavior('Good','ddd');
-		// $this->raiseEvent('onIndex',new CEvent($this));
+		$this->raiseEvent('onIndex',new CEvent($this));
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		// $this->render('index');
